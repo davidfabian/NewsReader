@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NewsReader</string>
+    <string name="loading">Loading</string>
+    <string name="nointernet">No connection.</string>
 </resources>
