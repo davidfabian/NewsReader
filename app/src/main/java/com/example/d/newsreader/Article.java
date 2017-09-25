@@ -13,27 +13,34 @@ public class Article {
     private String mTitle;
     private String mSection;
     private String mURL;
+    private String mAuthor;
 
     //basic constructor
-    public Article(String title, String section, String url) {
-        String mTitle = title;
-        String mSection = section;
-        String mURL = url;
+    public Article(String title, String section, String url, String author) {
+        mTitle = title;
+        mSection = section;
+        mURL = url;
+        mAuthor = author;
     }
 
     //title getter
-    public String getmTitle() {
+    String getmTitle() {
         return mTitle;
     }
 
     //section getter
-    public String getmSection() {
+    String getmSection() {
         return mSection;
     }
 
     //URL getter
-    public String getmURL() {
+    String getmURL() {
         return mURL;
+    }
+
+    //Author getter
+    String getmAuthor() {
+        return mAuthor;
     }
 
 }

@@ -7,11 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
 import java.util.List;
 
 /**
  * Created by d on 9/22/2017.
+ * Adapter to connect the data and the user interface
+ *
  */
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
@@ -28,13 +31,26 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         // Check if the existing view is being reused, otherwise inflate the view
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
+            return listItemView;
         }
+        final Article currentArticle = getItem(position);
+
+        //inflate
+        TextView sectionTextView = listItemView.findViewById(R.id.section_textview);
+        sectionTextView.setText(currentArticle.getmSection());
+
+        TextView authorTextView = listItemView.findViewById(R.id.author_textview);
+        authorTextView.setText(currentArticle.getmAuthor());
+
+        TextView titleTextView = listItemView.findViewById(R.id.title_textview);
+        titleTextView.setText(currentArticle.getmTitle());
+
         return listItemView;
     }
 }
+
