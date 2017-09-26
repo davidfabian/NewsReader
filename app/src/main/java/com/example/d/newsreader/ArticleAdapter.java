@@ -36,7 +36,6 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
-            return listItemView;
         }
         final Article currentArticle = getItem(position);
 
