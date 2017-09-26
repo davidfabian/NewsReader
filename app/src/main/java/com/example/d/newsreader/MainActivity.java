@@ -6,6 +6,7 @@ import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ListView;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String LOG_TAG = MainActivity.class.getSimpleName();
     private String statusmessage;
     private ArticleAdapter mAdapter;
+    private SwipeRefreshLayout swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,13 +36,26 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         } else {
             statusmessage = getString(R.string.nointernet);
         }
+
         ListView articleListView = (ListView) findViewById(R.id.list);
 
         mAdapter = new ArticleAdapter(this, QueryUtils.extractArticles());
 
         articleListView.setAdapter(mAdapter);
 
+        //swiperefresh method:
+        if (swipeLayout.isRefreshing()) {
+            swipeLayout.setRefreshing(false);
+        }
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
 
+            @Override
+            public void onRefresh() {
+                mAdapter.notifyDataSetChanged();
+                swipeLayout.setRefreshing(false);
+
+            }
+        });
     }
 
     @Override
@@ -70,4 +85,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // Loader reset, so we can clear out our existing data.
         mAdapter.clear();
     }
+
+
 }
