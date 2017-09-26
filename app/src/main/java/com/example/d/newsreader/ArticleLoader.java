@@ -25,8 +25,6 @@ public class ArticleLoader extends AsyncTaskLoader {
     @Override
     public List<Article> loadInBackground() {
         List<Article> articles = QueryUtils.extractArticles();
-
-
         return articles;
     }
 }
