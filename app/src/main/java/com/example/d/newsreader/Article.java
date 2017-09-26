@@ -16,11 +16,10 @@ public class Article {
     private String mAuthor;
 
     //basic constructor
-    public Article(String title, String section, String url, String author) {
+    public Article(String title, String section, String url) {
         mTitle = title;
         mSection = section;
         mURL = url;
-        mAuthor = author;
     }
 
     //title getter
