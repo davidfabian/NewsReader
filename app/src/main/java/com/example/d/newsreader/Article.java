@@ -1,5 +1,10 @@
 package com.example.d.newsreader;
 
+import android.util.Log;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by d on 9/22/2017.
  * news article class, to store individual news articles/details as objects.
@@ -46,7 +51,16 @@ public class Article {
 
     //Date getter
     String getmDate() {
-        return mDate;
+        SimpleDateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        SimpleDateFormat shortDate = new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate;
+        try {
+            formattedDate = shortDate.format(utcFormat.parse(mDate));
+        } catch (ParseException e) {
+            Log.e("parse problem", "date" + e);
+            formattedDate = "N/A";
+        }
+        return formattedDate;
     }
 
 }
