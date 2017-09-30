@@ -14,12 +14,14 @@ public class Article {
     private String mSection;
     private String mURL;
     private String mAuthor;
+    private String mDate;
 
     //basic constructor
-    public Article(String title, String section, String url) {
+    public Article(String title, String section, String url, String date) {
         mTitle = title;
         mSection = section;
         mURL = url;
+        mDate = date;
     }
 
     //title getter
@@ -40,6 +42,11 @@ public class Article {
     //Author getter
     String getmAuthor() {
         return mAuthor;
+    }
+
+    //Date getter
+    String getmDate() {
+        return mDate;
     }
 
 }

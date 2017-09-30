@@ -3,18 +3,21 @@ package com.example.d.newsreader;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by d on 9/22/2017.
  * Adapter to connect the data and the user interface
- *
  */
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
@@ -43,14 +46,29 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
         TextView sectionTextView = listItemView.findViewById(R.id.section_textview);
         sectionTextView.setText(currentArticle.getmSection());
 
-        /*
-        TextView authorTextView = listItemView.findViewById(R.id.author_textview);
-        authorTextView.setText(currentArticle.getmAuthor());
-        */
+
+        TextView dateTextView = listItemView.findViewById(R.id.date_textview);
+        dateTextView.setText(formattedDate(currentArticle.getmDate()));
+
         TextView titleTextView = listItemView.findViewById(R.id.title_textview);
         titleTextView.setText(currentArticle.getmTitle());
 
         return listItemView;
+    }
+
+    public String formattedDate(String strCurrentDate) {
+
+        SimpleDateFormat newFormat = new SimpleDateFormat("EEE, dd MMM yyyy");
+        Date newDate = new Date();
+        try {
+            newDate = newFormat.parse(strCurrentDate);
+        } catch (ParseException e) {
+            Log.e("getmDate:", strCurrentDate);
+        }
+
+
+        String dateFormattedString = newFormat.format(newDate);
+        return dateFormattedString;
     }
 }
 
