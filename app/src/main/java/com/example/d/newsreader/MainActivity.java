@@ -2,12 +2,15 @@ package com.example.d.newsreader;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -43,6 +46,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter = new ArticleAdapter(this, new ArrayList<Article>());
 
         articleListView.setAdapter(mAdapter);
+
+
+        //click on article opens article in browser
+
+        articleListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                //find current article
+                Article currentArticle = mAdapter.getItem(position);
+
+                // Convert the String URL into a URI object (to pass into the Intent constructor)
+                Uri articleURI = Uri.parse(currentArticle.getmURL());
+
+                // Create a new intent to view the earthquake URI
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, articleURI);
+
+                // Send the intent to launch a new activity
+                startActivity(websiteIntent);
+            }
+        });
+
 
         // Get a reference to the LoaderManager, in order to interact with loaders.
         LoaderManager loaderManager = getLoaderManager();
